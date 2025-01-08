@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Endpoints Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h1 {
+            color: #555;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            margin: 10px 0;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        strong {
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <h1>API Endpoints Documentation</h1>
+
+    <h2>Available Endpoints:</h2>
+    <ul>
+        <li><strong>GET /products</strong> - Retrieve a list of all products</li>
+        <li><strong>GET /products/:id</strong> - Retrieve details of a specific product by its ID</li>
+        <li><strong>POST /products</strong> - Add a new product</li>
+        <li><strong>PUT /products/:id</strong> - Update an existing product by its ID</li>
+        <li><strong>DELETE /products/:id</strong> - Remove a product by its ID</li>
+
+        <li><strong>GET /products/search-by-name/:name</strong> - Search for products by name</li>
+        <li><strong>GET /products/search-by-price/:price</strong> - Search for products by price</li>
+        <li><strong>GET /products/search-by-id/:id</strong> - Search for products by their ObjectId</li>
+
+        <li><strong>GET /products/search</strong> - Search for products by name and/or price</li>
+    </ul>
+</body>
+</html>
