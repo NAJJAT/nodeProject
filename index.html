@@ -3,339 +3,359 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node.js API Documentation - Categories & Products</title>
+    <title>API Documentation - Simple & Clear</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; background-color: #f8f9fa; }
-        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
-        h2 { color: #34495e; margin-top: 40px; border-left: 4px solid #3498db; padding-left: 15px; }
-        .intro { background: #e8f4fd; padding: 20px; border-radius: 8px; margin-bottom: 30px; border-left: 4px solid #3498db; }
-        .endpoint { background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #28a745; }
-        .method { display: inline-block; padding: 4px 8px; border-radius: 4px; color: white; font-weight: bold; margin-right: 10px; }
-        .get { background-color: #28a745; }
-        .post { background-color: #007bff; }
-        .put { background-color: #ffc107; color: #333; }
-        .delete { background-color: #dc3545; }
-        .url { font-family: monospace; font-weight: bold; color: #2c3e50; }
-        .description { color: #666; margin-top: 8px; }
-        .validation { background: #fff3cd; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ffc107; }
-        pre { background: #2d3748; color: #e2e8f0; padding: 15px; border-radius: 6px; overflow-x: auto; margin: 10px 0; }
-        .highlight { background: #fff3cd; padding: 2px 6px; border-radius: 3px; font-weight: bold; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            background: #f8f9fa;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+        }
+
+        .base-url {
+            background: #e3f2fd;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: #1976d2;
+            margin-top: 15px;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            color: #1976d2;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #e3f2fd;
+            padding-bottom: 10px;
+        }
+
+        .endpoint {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+
+        .method {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-right: 10px;
+            color: white;
+        }
+
+        .get { background: #28a745; }
+        .post { background: #007bff; }
+        .put { background: #ffc107; color: #333; }
+        .delete { background: #dc3545; }
+
+        .url {
+            font-family: monospace;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .description {
+            margin-top: 8px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .params {
+            margin-top: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+            font-size: 0.85rem;
+        }
+
+        .validation-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .field {
+            margin-bottom: 8px;
+        }
+
+        .field-name {
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .required {
+            color: #dc3545;
+            font-size: 0.8rem;
+        }
+
+        .optional {
+            color: #28a745;
+            font-size: 0.8rem;
+        }
+
+        .example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        .note {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🚀 Node.js API Documentation</h1>
-        
-        <div class="intro">
-            <h3>📝 Project Overview</h3>
-            <p>This is a <strong>database-driven REST API</strong> built with Node.js and Express. The API provides complete CRUD operations for <strong>two entities</strong>:</p>
-            <ul>
-                <li><strong>Category:</strong> Required, must be valid category ID</li>
-                <li><strong>Image:</strong> Optional, valid image URL</li>
-                <li><strong>Description:</strong> Optional, max 500 characters</li>
-                <li><strong>SKU:</strong> Optional, unique, uppercase letters/numbers/hyphens only</li>
-                <li><strong>Weight:</strong> Optional, positive number</li>
-                <li><strong>inStock:</strong> Auto-calculated based on quantity</li>
-            </ul>
+        <div class="header">
+            <h1>📚 API Documentation</h1>
+            <p>Simple REST API for Categories & Products</p>
+            <div class="base-url">Base URL: http://localhost:3000</div>
         </div>
 
-        <h2>🔧 Example Usage</h2>
-        
-        <h3>1. Create Category First:</h3>
-        <pre>POST /categories
-Content-Type: application/json
+        <!-- Categories Section -->
+        <div class="section">
+            <h2>📁 Categories</h2>
+            
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <span class="url">/categories</span>
+                <div class="description">Get all categories</div>
+                <div class="params">Query: limit, offset, sortBy, order</div>
+            </div>
 
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <span class="url">/categories/:id</span>
+                <div class="description">Get single category</div>
+            </div>
+
+            <div class="endpoint">
+                <span class="method post">POST</span>
+                <span class="url">/categories</span>
+                <div class="description">Create new category</div>
+            </div>
+
+            <div class="endpoint">
+                <span class="method put">PUT</span>
+                <span class="url">/categories/:id</span>
+                <div class="description">Update category</div>
+            </div>
+
+            <div class="endpoint">
+                <span class="method delete">DELETE</span>
+                <span class="url">/categories/:id</span>
+                <div class="description">Delete category (only if no products)</div>
+            </div>
+
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <span class="url">/categories/search-by-name/:name</span>
+                <div class="description">Search categories by name</div>
+            </div>
+
+            <div class="validation-box">
+                <h4>Category Fields:</h4>
+                <div class="field">
+                    <span class="field-name">name</span> <span class="required">(required)</span> - 2-50 characters, unique
+                </div>
+                <div class="field">
+                    <span class="field-name">quantity</span> <span class="required">(required)</span> - Non-negative number
+                </div>
+                <div class="field">
+                    <span class="field-name">description</span> <span class="optional">(optional)</span> - Max 200 characters
+                </div>
+                <div class="field">
+                    <span class="field-name">isActive</span> <span class="optional">(optional)</span> - Boolean, default: true
+                </div>
+            </div>
+
+            <div class="example">
+POST /categories
 {
   "name": "Electronics",
-  "description": "Electronic devices and gadgets",
-  "priority": 1
-}</pre>
+  "quantity": 50,
+  "description": "Electronic devices and accessories"
+}
+            </div>
+        </div>
 
-        <h3>2. Create Product with Category:</h3>
-        <pre>POST /products
-Content-Type: application/json
+        <!-- Products Section -->
+        <div class="section">
+            <h2>📦 Products</h2>
+            
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <span class="url">/products</span>
+                <div class="description">Get all products</div>
+                <div class="params">Query: limit, offset, sortBy, order</div>
+            </div>
 
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <span class="url">/products/:id</span>
+                <div class="description">Get single product</div>
+            </div>
+
+            <div class="endpoint">
+                <span class="method post">POST</span>
+                <span class="url">/products</span>
+                <div class="description">Create new product</div>
+            </div>
+
+            <div class="endpoint">
+                <span class="method put">PUT</span>
+                <span class="url">/products/:id</span>
+                <div class="description">Update product</div>
+            </div>
+
+            <div class="endpoint">
+                <span class="method delete">DELETE</span>
+                <span class="url">/products/:id</span>
+                <div class="description">Delete product</div>
+            </div>
+
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <span class="url">/products/search-by-name/:name</span>
+                <div class="description">Search products by name</div>
+            </div>
+
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <span class="url">/products/search-by-category/:categoryId</span>
+                <div class="description">Get products in category</div>
+            </div>
+
+            <div class="validation-box">
+                <h4>Product Fields:</h4>
+                <div class="field">
+                    <span class="field-name">name</span> <span class="required">(required)</span> - 2-100 characters
+                </div>
+                <div class="field">
+                    <span class="field-name">quantity</span> <span class="required">(required)</span> - Non-negative number
+                </div>
+                <div class="field">
+                    <span class="field-name">price</span> <span class="required">(required)</span> - Positive number
+                </div>
+                <div class="field">
+                    <span class="field-name">category</span> <span class="required">(required)</span> - Valid category ID
+                </div>
+                <div class="field">
+                    <span class="field-name">sku</span> <span class="optional">(optional)</span> - Unique product code
+                </div>
+                <div class="field">
+                    <span class="field-name">image</span> <span class="optional">(optional)</span> - Image URL
+                </div>
+                <div class="field">
+                    <span class="field-name">description</span> <span class="optional">(optional)</span> - Product description
+                </div>
+            </div>
+
+            <div class="example">
+POST /products
 {
-  "name": "Gaming Laptop",
+  "name": "iPhone 15",
   "quantity": 10,
-  "price": 1299.99,
-  "category": "677exxxxxxxxxxxxxxxxxx",
-  "sku": "LAPTOP-GAMING-001",
-  "description": "High-performance gaming laptop",
-  "image": "https://example.com/laptop.jpg",
-  "weight": 2.5
-}</pre>
-
-        <h3>3. Search Examples:</h3>
-        <pre>GET /categories/search/name/electronics
-GET /products/search-by-name/laptop
-GET /products/search-by-category/677exxxxxxxxxxxxxxxxxx
-GET /products/search/price/1299.99
-GET /categories?limit=5&offset=0&sortBy=name&order=asc</pre>
-
-        <h2>🗂️ Complete Workflow Example</h2>
-        
-        <h3>Step 1: Create Categories</h3>
-        <pre>POST /categories {"name": "Electronics", "priority": 1}
-POST /categories {"name": "Clothing", "priority": 2}
-POST /categories {"name": "Books", "priority": 3}</pre>
-
-        <h3>Step 2: Create Products</h3>
-        <pre>POST /products {"name": "Laptop", "quantity": 5, "price": 999.99, "category": "{electronics_id}"}
-POST /products {"name": "T-Shirt", "quantity": 20, "price": 19.99, "category": "{clothing_id}"}</pre>
-
-        <h3>Step 3: Search and Filter</h3>
-        <pre>GET /products/search-by-category/{electronics_id}
-GET /categories/search/name/elect</pre>
-
-        <h2>🔗 Relationship Features</h2>
-        <ul>
-            <li><strong>Category-Product Relationship:</strong> Products reference categories by ID</li>
-            <li><strong>Auto Product Count:</strong> Categories track how many products they contain</li>
-            <li><strong>Cascade Protection:</strong> Cannot delete category with existing products</li>
-            <li><strong>Population:</strong> Product queries include category details</li>
-        </ul>
-
-        <h2>⚡ Advanced Features</h2>
-        <ul>
-            <li><strong>Pagination:</strong> All list endpoints support limit/offset</li>
-            <li><strong>Sorting:</strong> Sort by any field in ascending/descending order</li>
-            <li><strong>Multiple Search Types:</strong> Search by name, field/value, or category</li>
-            <li><strong>Auto-calculated Fields:</strong> inStock status, product counts</li>
-            <li><strong>Data Integrity:</strong> Referential integrity between categories and products</li>
-            <li><strong>Input Validation:</strong> Comprehensive validation on all inputs</li>
-        </ul>
-
-        <h2>📊 Response Examples</h2>
-        
-        <h3>Get Categories Response:</h3>
-        <pre>{
-  "categories": [
-    {
-      "_id": "677exxxxxxxxxxxxxxxxxx",
-      "name": "Electronics",
-      "description": "Electronic devices and gadgets",
-      "isActive": true,
-      "productCount": 5,
-      "priority": 1,
-      "createdAt": "2025-01-08T...",
-      "updatedAt": "2025-01-08T..."
-    }
-  ],
-  "pagination": {
-    "total": 10,
-    "limit": 10,
-    "offset": 0,
-    "hasMore": false
-  }
-}</pre>
-
-        <h3>Get Products Response:</h3>
-        <pre>{
-  "products": [
-    {
-      "_id": "677exxxxxxxxxxxxxxxxxx",
-      "name": "Gaming Laptop",
-      "quantity": 10,
-      "price": 1299.99,
-      "category": {
-        "_id": "677exxxxxxxxxxxxxxxxxx",
-        "name": "Electronics",
-        "description": "Electronic devices and gadgets"
-      },
-      "sku": "LAPTOP-GAMING-001",
-      "description": "High-performance gaming laptop",
-      "inStock": true,
-      "weight": 2.5,
-      "createdAt": "2025-01-08T...",
-      "updatedAt": "2025-01-08T..."
-    }
-  ],
-  "pagination": {
-    "total": 25,
-    "limit": 10,
-    "offset": 0,
-    "hasMore": true
-  }
-}</pre>
-
-        <h2>🚨 Error Handling</h2>
-        <ul>
-            <li><strong>400 Bad Request:</strong> Validation errors, invalid data</li>
-            <li><strong>404 Not Found:</strong> Resource doesn't exist</li>
-            <li><strong>500 Internal Server Error:</strong> Database or server issues</li>
-        </ul>
-
-        <h3>Example Error Response:</h3>
-        <pre>{
-  "error": "Category validation failed: name: Category name can only contain letters, spaces, hyphens and ampersands"
-}</pre>
-
-        <div style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 6px; margin: 20px 0;">
-            <strong>⚠️ Important Notes:</strong>
-            <ul>
-                <li>Create categories before creating products</li>
-                <li>Category IDs are required when creating products</li>
-                <li>Cannot delete categories that have products assigned</li>
-                <li>All search operations are case-insensitive</li>
-                <li>Product counts in categories are automatically maintained</li>
-            </ul>
+  "price": 999.99,
+  "category": "64f123456789abcd12345678",
+  "sku": "IPH15-128GB"
+}
+            </div>
         </div>
 
-        <div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 6px; margin: 20px 0;">
-            <strong>🎯 Testing Tips:</strong>
-            <ul>
-                <li>Start by creating 2-3 categories</li>
-                <li>Create 5-10 products assigned to these categories</li>
-                <li>Test pagination with limit=3&offset=0</li>
-                <li>Try searching by different fields</li>
-                <li>Test validation by sending invalid data</li>
-            </ul>
-        </div>
+        <!-- Quick Reference -->
+        <div class="section">
+            <h2>⚡ Quick Reference</h2>
+            
+            <div class="note">
+                <strong>💡 Key Points:</strong>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li>All responses are in JSON format</li>
+                    <li>Products must belong to a valid category</li>
+                    <li>Categories with products cannot be deleted</li>
+                    <li>Use pagination with <code>limit</code> and <code>offset</code></li>
+                    <li>Search is case-insensitive</li>
+                </ul>
+            </div>
 
+            <div class="example">
+# Test the API
+curl http://localhost:3000/categories
+curl http://localhost:3000/products
+
+# Create category first, then products
+curl -X POST http://localhost:3000/categories \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Books","quantity":100}'
+            </div>
+        </div>
     </div>
 </body>
-</html>>Categories</strong> - Product category management</li>
-                <li><strong>Products</strong> - Product inventory with category relationships</li>
-            </ul>
-            <p><strong>Base URL:</strong> <code>http://localhost:3000</code></p>
-            <p><strong>Database:</strong> MongoDB with Mongoose ODM</p>
-        </div>
-
-        <div style="background: #d1ecf1; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #17a2b8;">
-            <h3>✅ Requirements Compliance</h3>
-            <ul>
-                <li><span class="highlight">Two CRUD interfaces</span> - Categories and Products</li>
-                <li><span class="highlight">Database-driven</span> - MongoDB with dynamic data</li>
-                <li><span class="highlight">Pagination</span> - Limit/offset on all list endpoints</li>
-                <li><span class="highlight">Search functionality</span> - Multiple search endpoints</li>
-                <li><span class="highlight">Validation</span> - Basic and advanced validation rules</li>
-                <li><span class="highlight">HTTP verbs</span> - GET, POST, PUT, DELETE</li>
-                <li><span class="highlight">Documentation</span> - This page at root URL</li>
-            </ul>
-        </div>
-
-        <h2>📁 Category Endpoints (Entity 1)</h2>
-
-        <div class="endpoint">
-            <span class="method get">GET</span>
-            <span class="url">/categories</span>
-            <div class="description"><strong>Get all categories with pagination</strong><br>
-            Query params: <code>limit</code> (default: 10), <code>offset</code> (default: 0), <code>sortBy</code>, <code>order</code> (asc/desc)</div>
-        </div>
-
-        <div class="endpoint">
-            <span class="method get">GET</span>
-            <span class="url">/categories/:id</span>
-            <div class="description">Get single category by ID</div>
-        </div>
-
-        <div class="endpoint">
-            <span class="method post">POST</span>
-            <span class="url">/categories</span>
-            <div class="description">Create new category<br>
-            <strong>Required:</strong> name<br>
-            <strong>Optional:</strong> description, isActive, priority</div>
-        </div>
-
-        <div class="endpoint">
-            <span class="method put">PUT</span>
-            <span class="url">/categories/:id</span>
-            <div class="description">Update existing category</div>
-        </div>
-
-        <div class="endpoint">
-            <span class="method delete">DELETE</span>
-            <span class="url">/categories/:id</span>
-            <div class="description">Delete category (only if no products assigned)</div>
-        </div>
-
-        <div class="endpoint">
-            <span class="method get">GET</span>
-            <span class="url">/categories/search-by-name/:name</span>
-            <div class="description">Search categories by name (case-insensitive)</div>
-        </div>
-
-        <div class="endpoint">
-            <span class="method get">GET</span>
-            <span class="url">/categories/search/:field/:value</span>
-            <div class="description"><span class="highlight">Search categories by field value</span><br>
-            Fields: name, isActive, priority<br>
-            Query params: <code>limit</code>, <code>offset</code></div>
-        </div>
-
-        <h2>🛍️ Product Endpoints (Entity 2)</h2>
-
-        <div class="endpoint">
-            <span class="method get">GET</span>
-            <span class="url">/products</span>
-            <div class="description"><strong>Get all products with pagination</strong><br>
-            Includes category information. Query params: <code>limit</code>, <code>offset</code>, <code>sortBy</code>, <code>order</code></div>
-        </div>
-
-        <div class="endpoint">
-            <span class="method get">GET</span>
-            <span class="url">/products/:id</span>
-            <div class="description">Get single product by ID with category details</div>
-        </div>
-
-        <div class="endpoint">
-            <span class="method post">POST</span>
-            <span class="url">/products</span>
-            <div class="description">Create new product<br>
-            <strong>Required:</strong> name, quantity, price, category (ID)<br>
-            <strong>Optional:</strong> image, description, sku, weight</div>
-        </div>
-
-        <div class="endpoint">
-            <span class="method put">PUT</span>
-            <span class="url">/products/:id</span>
-            <div class="description">Update existing product</div>
-        </div>
-
-        <div class="endpoint">
-            <span class="method delete">DELETE</span>
-            <span class="url">/products/:id</span>
-            <div class="description">Delete product (updates category product count)</div>
-        </div>
-
-        <div class="endpoint">
-            <span class="method get">GET</span>
-            <span class="url">/products/search-by-name/:name</span>
-            <div class="description">Search products by name (case-insensitive)</div>
-        </div>
-
-        <div class="endpoint">
-            <span class="method get">GET</span>
-            <span class="url">/products/search-by-category/:categoryId</span>
-            <div class="description">Get all products in a specific category<br>
-            Query params: <code>limit</code>, <code>offset</code></div>
-        </div>
-
-        <div class="endpoint">
-            <span class="method get">GET</span>
-            <span class="url">/products/search/:field/:value</span>
-            <div class="description"><span class="highlight">Search products by field value</span><br>
-            Fields: name, price, sku, inStock<br>
-            Query params: <code>limit</code>, <code>offset</code></div>
-        </div>
-
-        <div class="validation">
-            <h2>📋 Validation Rules</h2>
-            
-            <h3>Categories:</h3>
-            <ul>
-                <li><strong>Name:</strong> Required, unique, 2-50 characters, letters/spaces/hyphens only</li>
-                <li><strong>Description:</strong> Optional, max 200 characters</li>
-                <li><strong>isActive:</strong> Boolean, default true</li>
-                <li><strong>Priority:</strong> Integer, default 0</li>
-                <li><strong>Product Count:</strong> Auto-calculated, read-only</li>
-            </ul>
-            
-            <h3>Products:</h3>
-            <ul>
-                <li><strong>Name:</strong> Required, 2-100 characters, cannot be only numbers</li>
-                <li><strong>Quantity:</strong> Required, non-negative integer</li>
-                <li><strong>Price:</strong> Required, positive number, max 2 decimal places</li>
-                <li><strong
+</html>
